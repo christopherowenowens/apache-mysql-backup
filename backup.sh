@@ -19,6 +19,7 @@
     # User defined
     TARGETDIR="/var/www"
     BACKUPDIR="/home/user/backups/"
+	logRecipient="you@you.com"
     #APACHELOGDIR="/var/log/apache2"
     #APACHESITESAVAIL="/etc/apache2/sites-available"
     #APACHESITESENABLED="/etc/apache2/sites-enabled"
@@ -166,18 +167,18 @@ realaWebBackup | tee -a $logFile
 
 
 
-# Email result
+
     # Email result
-#    echo "Emailing $logRecipient... "
-#    echo "$(<$logFile)" | mail -s "QLCHI Backup Report" owen@quantumleapchicago.com
+     echo "Emailing $logRecipient... "
+     echo "$(<$logFile)" | mail -s "web Backup Report" $logRecipient
 
     # Quick sanity check email log for send and append to log
-#    emailLog=`tail -n 2 /var/log/mail.log | head -n 1`
-#    if [[ $emailLog == *"status=sent"* ]]; then
-#        echo "Email status: Looks good! Quick check of /var/log/mail.log looks like it sent ok!" >> $logFile
-#    else
-#        echo "Email status: Uh-oh! /var/log/mail.log indicates it may have failed sending email!" >> $logFile
-#    fi
+     emailLog=`tail -n 2 /var/log/mail.log | head -n 1`
+     if [[ $emailLog == *"status=sent"* ]]; then
+         echo "Email status: Looks good! Quick check of /var/log/mail.log looks like it sent ok!" >> $logFile
+     else
+         echo "Email status: Uh-oh! /var/log/mail.log indicates it may have failed sending email!" >> $logFile
+     fi
 
 
 
